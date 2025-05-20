@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Climate Change &amp; B.C. First Nations</title>
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  <meta name="description" content="The impact of climate change over First Nations in B.C. explained." />
+
+  <style>
+        body {
+            margin: 0;
+            font-family: 'Nunito', sans-serif;
+            background-color: #f9f6f1; /* Light cream background */
+            padding-top: 3.5rem;
+            color: #333333; /* Charcoal text */
+        }
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+    /* ==========================
+       Base/Utility Classes
+       ========================== */
+    .base_section {
+      max-width: 800px;
+      min-width: 300px;
+      padding: 1rem;
+      margin: 1rem;
+      width: 100%;
+      text-align: left;
+      text-shadow: 0 0 50px rgba(0,0,0,0.05);
+    }
+    .base_section p {
+      font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+    }
+    .base_section h1 {
+      color: #c18f00; /* Ochre gold for headings */
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      margin: auto;
+    }
+
+    .base_bar {
+      width: 100%;
+      background-color: #2e5339; /* Forest green */
+      color: white;
+      padding: 0.5rem 1rem;
+      text-align: center;
+    }
+    .base_bar h1 {
+      font-size: clamp(1rem, 4vw, 1.5rem);
+      margin: 0;
+    }
+
+    .base_button {
+      display: block;
+      background-color: #5f402c; /* Earth brown */
+      color: white;
+      padding: 0.5rem 1rem;
+      margin: 2rem auto;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+      text-align: center;
+      width: fit-content;
+    }
+    .base_button:hover {
+      background-color: #cc5500; /* Burnt orange */
+    }
+
+    /* ==========================
+       Top Navigation Bar
+       ========================== */
+    .top_bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3.5rem;
+      background-color: #5f402c; /* Earth brown */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+    .project_title_button {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .project_title_button:hover {
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 6px;
+    }
+    .top_right_container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .top_right_container a {
+      color: white;
+      text-decoration: none;
+    }
+    .top_right_container a:hover {
+      color: #ffdd99;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      width: fit-content;
+    }
+    .dropdown_button {
+      background-color: #5f402c;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      margin: 0 2rem;
+    }
+    .dropdown_content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #f0ece6;
+      min-width: 160px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      z-index: 1001;
+    }
+    .dropdown_content a {
+      color: #333;
+      padding: 0.75rem 1rem;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown_content a:hover {
+      background-color: #ddd3c1;
+      border-radius: 5px;
+    }
+    .dropdown:hover .dropdown_content {
+      display: block;
+    }
+    .dropdown:hover .dropdown_button {
+      background-color: #cc5500;
+    }
+    /* Hide links for mobile */
+    .hide_on_mobile {
+      display: none;
+    }
+
+    /* ==========================
+       Responsive adjustments
+       ========================== */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 10rem;
+      }
+      .top_bar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 0.5rem 1rem;
+      }
+      .top_right_container {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+      .top_right_container a,
+      .dropdown_button {
+        width: fit-content;
+        padding: 0.5rem 1rem;
+        text-align: left;
+      }
+      .dropdown_content {
+        position: static;
+        box-shadow: none;
+        background-color: #e6e2db;
+        border-radius: 5px;
+        width: 100%;
+      }
+      .dropdown_content a {
+        padding: 0.5rem 1rem;
+      }
+      .dropdown {
+        width: 100%;
+      }
+      .project_title_button {
+        padding: 0.5rem 0;
+      }
+    }
+
+    /* ==========================
+       Other Page Components
+       ========================== */
+    .sections_container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+      justify-items: center;
+    }
+
+    .image_container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .left_to_right_img {
+      max-height: 600px;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0;
+      padding: 0;
+      object-fit: cover;
+    }
+    .image_overlay_text {
+      position: absolute;
+      top: 50%;
+      left: 52%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: left;
+      width: 100%;
+      padding: 1rem;
+    }
+    .image_overlay_text h1 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      margin: 0;
+    }
+    .image_overlay_text p {
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      margin: 0.5rem 0 0 0;
+    }
+    .bar_with_text {
+      width: 100%;
+      background-color: #2e5339;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-align: center;
+    }
+    .bar_with_text h1 {
+      font-size: clamp(1rem, 4vw, 1.5rem);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="top_bar">
+        <a href="/" class="project_title_button">Climate Change &amp; B.C. First Nations</a>
+        <div class="top_right_container">
+            <a href="/overview" class="hide_on_mobile">Overview</a>
+            <a href="/impacts" class="hide_on_mobile">Impacts</a>
+            <div class="dropdown">
+                <button class="dropdown_button">Menu ▾</button>
+                <div class="dropdown_content">
+                    <a href="/overview">Overview</a>
+                    <a href="/impacts">Impacts</a>
+                    <a href="/sources">Sources</a>
+                    <a href="/quiz-contact">Quiz &amp; Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
