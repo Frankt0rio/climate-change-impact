@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Climate Change &amp; B.C. First Nations</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+    <meta name="description" content="The impact of climate change over First Nations in B.C. explained." />
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Nunito', sans-serif;
+            background-color: #f9f6f1;
+            color: #333333;
+        }
+        body {
+            flex-direction: column;
+            padding-top: 2rem;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
+        .top_bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3.5rem;
+            background-color: #5f402c;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .project_title_button {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        .project_title_button:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 6px;
+        }
+
+        .top_right_container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .top_right_container a {
+            color: white;
+            text-decoration: none;
+        }
+        .top_right_container a:hover {
+            color: #ffdd99;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: fit-content;
+        }
+        .dropdown_button {
+            background-color: #5f402c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin: 0 2rem;
+        }
+        .dropdown_content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f0ece6;
+            min-width: 160px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            z-index: 1001;
+        }
+        .dropdown_content a {
+            color: #333;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown_content a:hover {
+            background-color: #ddd3c1;
+            border-radius: 5px;
+        }
+        .dropdown:hover .dropdown_content {
+            display: block;
+        }
+        .dropdown:hover .dropdown_button {
+            background-color: #cc5500;
+        }
+
+        .image_container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .left_to_right_img {
+            max-height: 600px;
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        .image_overlay_text {
+            position: absolute;
+            top: 50%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: left;
+            width: 100%;
+            padding: 1rem;
+        }
+        .image_overlay_text h1 {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            margin: 0;
+        }
+        .image_overlay_text p {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            margin: 0.5rem 0 0 0;
+        }
+
+        .bar_with_text {
+            width: 100%;
+            background-color: #2e5339;
+            color: white;
+            padding: 0.5rem 1rem;
+            text-align: center;
+        }
+        .bar_with_text h1 {
+            font-size: clamp(1rem, 4vw, 2rem);
+            margin: 0;
+        }
+
+        .sections_container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            padding: 0 1rem;
+            justify-items: center;
+            flex: 1;
+        }
+
+        .base_section {
+            max-width: 800px;
+            min-width: 300px;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .base_section p {
+            font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+            margin-bottom: auto;
+        }
+        .base_section h1 {
+            color: #c18f00;
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            text-align: center;
+        }
+        .base_section img {
+            background-image: inherit;
+        }
+
+        .base_button {
+            display: block;
+            background-color: #5f402c;
+            color: white;
+            padding: 0.5rem 1rem;
+            margin: 2rem auto;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            text-align: center;
+            width: fit-content;
+        }
+        .base_button:hover {
+            background-color: #cc5500;
+        }
+
+        .site_footer {
+            background-color: #e2dacc;
+            color: 333333;
+            text-align: center;
+            padding: 0.3rem;
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+        .site_footer .footer_content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 5rem;
+            }
+            .top_bar {
+                flex-direction: column;
+                align-items: flex-start;
+                height: auto;
+                padding: 0.5rem 1rem;
+            }
+            .top_right_container {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .top_right_container a,
+            .dropdown_button {
+                width: fit-content;
+                padding: 0.5rem 1rem;
+                text-align: left;
+            }
+            .dropdown_content {
+                position: static;
+                box-shadow: none;
+                background-color: #e6e2db;
+                border-radius: 5px;
+                width: 100%;
+            }
+            .dropdown_content a {
+                padding: 0.5rem 1rem;
+            }
+            .dropdown {
+                width: 100%;
+            }
+            .project_title_button {
+                padding: 0.5rem 0;
+            }
+            .hide_on_mobile {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div class="top_bar">
+        <a href="/" class="project_title_button">Climate Change & B.C. First Nations</a>
+        <div class="top_right_container">
+            <a href="/quiz" class="hide_on_mobile">Quiz & Email</a>
+            <a href="/sources" class="hide_on_mobile">Sources</a>
+            <div class="dropdown">
+                <button class="dropdown_button">Menu ▾</button>
+                <div class="dropdown_content">
+                    <a href="/overview">Overview</a>
+                    <a href="/impacts">Impacts</a>
+                    <a href="/sources">Sources</a>
+                    <a href="/quiz">Quiz & Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation bar -->
+
+    <div class="sections_container">
+    <section class="base_section" style="text-align: left;">
+        <h2>References and Sources</h2>
+        <ul>
+            <li>BC First Nations Climate Strategy and Action Plan, 2022. First Nations Leadership Council.</li>
+            <li>BC Wildfire Service Annual Report, 2024.</li>
+            <li>Declaration on the Rights of Indigenous Peoples Act, British Columbia, 2019.</li>
+            <li>Great Bear Rainforest Agreements, 2016 2023. Coastal First Nations and Province of BC.</li>
+            <li>Heiltsuk Tribal Council Community Energy Plan, 2022.</li>
+            <li>Kitsumkalum First Nation Climate Monitoring Program, 2023.</li>
+            <li>Kanaka Bar Indian Band Community Climate Resilience Strategy, 2022.</li>
+            <li>Tsleil-Waututh Nation Climate Resilience Plan, 2021.</li>
+            <li>Tsay Keh Dene Nation Climate Monitoring Network Partnership, 2023.</li>
+            <li>Union of BC Indian Chiefs Climate Emergency Declaration, 2019.</li>
+            <li>BC Assembly of First Nations Climate Emergency Declaration, 2019.</li>
+            <li>June 2021 Heat Dome and Lytton Wildfire Event Reports, Environment Canada and BC Wildfire Service.</li>
+            <li>November 2021 Atmospheric River Floods Impact Assessment, BC Emergency Management.</li>
+            <li>BC Government News Releases, 2023, including BC First Nations Climate Action Fund announcement.</li>
+            <li>UN Declaration on the Rights of Indigenous Peoples (UNDRIP), 2007.</li>
+            <li>News articles and analyses from The Narwhal, CBC News, and National Observer on BC Indigenous climate impacts and governance (2019 2024).</li>
+            <li>BC Ministry of Environment reports on climate adaptation, 2021.</li>
+            <li>First Nations Emergency Services Society of BC wildfire collaboration report, 2023.</li>
+            <li>Indigenous Clean Energy Social Enterprise reports, 2022.</li>
+            <li>Pacific Climate Impacts Consortium data on BC temperature and precipitation trends, 2020.</li>
+            <li>Fraser Basin Council reports on flood resilience and Indigenous participation, 2021.</li>
+            <li>BC Environmental Assessment Office Indigenous engagement summaries, 2022.</li>
+            <li>Indigenous Climate Action (ICA) organization publications, 2021 2023.</li>
+            <li>Canadian Climate Institute's Indigenous climate vulnerability assessment, 2020.</li>
+            <li>University of British Columbia (UBC) Indigenous Climate Research program, 2022.</li>
+            <li>First Nations Health Authority reports on climate health impacts, 2023.</li>
+            <li>BC Assembly of First Nations Environmental Stewardship reports, 2022.</li>
+            <li>Natural Resources Canada wildfire risk assessments involving Indigenous lands, 2021.</li>
+            <li>First Nations Technology Council on climate monitoring tools and youth engagement, 2023.</li>
+            <li>Indigenous Guardians programs in BC coastal and interior regions, 2022.</li>
+            <li>BC Ministry of Forests Indigenous Partnerships in wildfire management, 2023.</li>
+            <li>Climate Emergency declarations by First Nations regional councils, 2019 2020.</li>
+            <li>Reports on the 2021 BC Floods and Indigenous community recovery initiatives.</li>
+            <li>Media coverage of Indigenous-led wildfire prevention projects, 2023.</li>
+            <li>Reports on traditional ecological knowledge (TEK) integration in BC climate adaptation, 2022.</li>
+            <li>BC provincial government Indigenous relations and reconciliation updates, 2023.</li>
+            <li>Reports on community-based climate monitoring networks in northern BC, 2023.</li>
+            <li>Indigenous youth climate leadership initiatives and programs, 2023.</li>
+        </ul>
+    </section>
+</div>
+
+    
+
+
+    <a href="/overview" class="base_button">Go back</a>
+    <!-- Footer -->
+    <footer class="site_footer">
+        <div class="footer_content">
+            <p>&copy; Frank & Matthew | <a href="/sources">Sources</a></p>
+        </div>
+    </footer>
+    <!-- Footer -->
+</body>
+</html>

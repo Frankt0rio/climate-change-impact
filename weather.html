@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Climate Change &amp; B.C. First Nations</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+    <meta name="description" content="The impact of climate change over First Nations in B.C. explained." />
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Nunito', sans-serif;
+            background-color: #f9f6f1;
+            color: #333333;
+        }
+        body {
+            flex-direction: column;
+            padding-top: 2rem;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
+        .top_bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3.5rem;
+            background-color: #5f402c;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .project_title_button {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        .project_title_button:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 6px;
+        }
+
+        .top_right_container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .top_right_container a {
+            color: white;
+            text-decoration: none;
+        }
+        .top_right_container a:hover {
+            color: #ffdd99;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: fit-content;
+        }
+        .dropdown_button {
+            background-color: #5f402c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin: 0 2rem;
+        }
+        .dropdown_content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f0ece6;
+            min-width: 160px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            z-index: 1001;
+        }
+        .dropdown_content a {
+            color: #333;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown_content a:hover {
+            background-color: #ddd3c1;
+            border-radius: 5px;
+        }
+        .dropdown:hover .dropdown_content {
+            display: block;
+        }
+        .dropdown:hover .dropdown_button {
+            background-color: #cc5500;
+        }
+
+        .image_container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .left_to_right_img {
+            max-height: 600px;
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        .image_overlay_text {
+            position: absolute;
+            top: 50%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: left;
+            width: 100%;
+            padding: 1rem;
+        }
+        .image_overlay_text h1 {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            margin: 0;
+        }
+        .image_overlay_text p {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            margin: 0.5rem 0 0 0;
+        }
+
+        .bar_with_text {
+            width: 100%;
+            background-color: #2e5339;
+            color: white;
+            padding: 0.5rem 1rem;
+            text-align: center;
+        }
+        .bar_with_text h1 {
+            font-size: clamp(1rem, 4vw, 2rem);
+            margin: 0;
+        }
+
+        .sections_container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            padding: 0 1rem;
+            justify-items: center;
+            flex: 1;
+        }
+
+        .base_section {
+            max-width: 800px;
+            min-width: 300px;
+            background-color: #fff;
+            box-shadow: 0 0 50px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem;
+            width: 100%;
+            text-align: center;
+            text-shadow: 0 0 50px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .base_section p {
+            font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+            margin-bottom: auto;
+        }
+        .base_section h1 {
+            color: #c18f00;
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            text-align: center;
+        }
+        .base_section h1 {
+            color: #c18f00;
+            font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+            text-align: center;
+        }
+        .base_section img {
+            background-image: inherit;
+        }
+
+        .base_button {
+            display: block;
+            background-color: #5f402c;
+            color: white;
+            padding: 0.5rem 1rem;
+            margin: 2rem auto;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            text-align: center;
+            width: fit-content;
+        }
+        .base_button:hover {
+            background-color: #cc5500;
+        }
+
+        .site_footer {
+            background-color: #e2dacc;
+            color: 333333;
+            text-align: center;
+            padding: 0.3rem;
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+        .site_footer .footer_content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 5rem;
+            }
+            .top_bar {
+                flex-direction: column;
+                align-items: flex-start;
+                height: auto;
+                padding: 0.5rem 1rem;
+            }
+            .top_right_container {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .top_right_container a,
+            .dropdown_button {
+                width: fit-content;
+                padding: 0.5rem 1rem;
+                text-align: left;
+            }
+            .dropdown_content {
+                position: static;
+                box-shadow: none;
+                background-color: #e6e2db;
+                border-radius: 5px;
+                width: 100%;
+            }
+            .dropdown_content a {
+                padding: 0.5rem 1rem;
+            }
+            .dropdown {
+                width: 100%;
+            }
+            .project_title_button {
+                padding: 0.5rem 0;
+            }
+            .hide_on_mobile {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div class="top_bar">
+        <a href="/" class="project_title_button">Climate Change & B.C. First Nations</a>
+        <div class="top_right_container">
+            <a href="/quiz" class="hide_on_mobile">Quiz & Email</a>
+            <a href="/sources" class="hide_on_mobile">Sources</a>
+            <div class="dropdown">
+                <button class="dropdown_button">Menu ▾</button>
+                <div class="dropdown_content">
+                    <a href="/overview">Overview</a>
+                    <a href="/impacts">Impacts</a>
+                    <a href="/sources">Sources</a>
+                    <a href="/quiz">Quiz & Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation bar -->
+    <img src="/static/weather_hero_img.png" alt="Weather" class="left_to_right_img"/>
+    <h1 class="bar_with_text"  style="background-color: #009790; margin-top: 0;">Extreme Weather</h1>
+
+    <div class="sections_container">
+        <div class="base_section" style="max-width: 60%;">
+            <h1 style="color: #009790;">Extreme Weather & Flooding</h1>
+            <p>An atmospheric river is a long and narrow concentrated band of moisture that transports huge amounts of water. In November of 2021, an atmospheric river brought intense and extreme rainfall to southern BC, mostly flooding farmland, towns and highways. Flooding causes landslides/mudslides and cuts off critical highways or roads that stranded residents and incapacitated the effectiveness of emergency response. Entire communities were isolated or forced to evacuate, including Indigenous communities near the Nicola River and Merritt.</p>
+            <p>In the aftermath of the flooding, many First Nations communities were cut off from essential services and supplies. The flooding also caused significant damage to homes, infrastructure, and agricultural land, leading to long-term economic and social impacts.</p>
+            <p>In addition to the immediate impacts of flooding, the atmospheric river also had long-term effects on the region's water supply and ecosystem. The heavy rainfall caused soil erosion and sedimentation in rivers and streams, which can harm fish habitats and water quality.</p>
+        </div>
+    </div>
+    <div class="sections_container">
+        <div class="base_section" style="max-width: 60%;">
+            <h1 style="color: #009790;">Is This Linked to Humans?</h1>
+            <p>Unfortunately, it seems that humans are highly likely to be the cause of the flooding and extreme weather we have seen in recent years. Flooding in BC was researched, and the outcome concluded that humans contributed to making this event more likely to happen, as well as intensifying the effect of it. Studies show that the likely-hood of this happening has been or can be increased up to 60% due to climate change.</p>
+            <p>Here are the studies if you care to learn more about this:
+                <br><br>
+                <a href="https://www.sciencedirect.com/science/article/pii/S2212094724000665" target="_blank" rel="noopener">Climatological context of the mid-November 2021 floods in the province of British Columbia, Canada</a>
+                <br><br>
+                <a href="https://www.sciencedirect.com/science/article/pii/S2212094722000287" target="_blank" rel="noopener">Human influence in the 2021 British Columbia floods</a>
+            </p>
+        </div>
+    </div>
+    <h1 class="bar_with_text"  style="background-color: #009790; margin-top: 0;">Other Weather Changes</h1>
+    <div class="sections_container">
+        <div class="base_section">
+            <h2>Heatwaves & Extreme Temperatures</h2>
+            <p>As talked about earlier, the heatwave that claimed 600 lives in 2021 peaked at 50 degrees celsius. Indigenous communities were especially affected because of their living conditions. A big part of indigenous communities are older and live with limited ventilation and little to no access to air conditioning.Their public health systems were underfunded and underprepared for a disaster of this scale. This could be due to colonialism legacies, as indigenous communities are often excluded from decision making.</p>
+            <h2>Changing Seasonal Patterns</h2>
+            <p>Temperatures have risen and according to Palmer, Herms and Maco from the Davey Institute in their article about “Climate Change Projections for British Columbia,”  they talk about how temperatures have risen by 1.9C between 1948 and 2016. This change affects all seasons, especially the winter, where temperatures have risen by 3.7C and are increasing at a fast rate.</p>
+            <h2>Strain on Community Resources</h2>
+            <p>These rapid environmental shifts are challenging the emergency planning, housing, and healthcare systems of many Indigenous communities. They cannot handle the stress of back-to-back disasters that are only going to worsen over time.</p>
+        </div>
+    </div>
+    <h1 class="bar_with_text" style="background-color: cadetblue;">Critical Thinking</h1>
+
+    <div class="sections_container">
+        <section class="base_section">
+            <h1 style="color: #009790;">What do we think?</h1>
+            <p>Due to our human activities, we have changed the climate and now the First Nations, the ones who arguably affect the environment the least, are the ones eating most the punches. They still have underfunded support for their people in need, specially highlighted by the heatwave of 2021, where not everyone had access to proper cooling and insulation. </p>
+        </section>
+    </div>
+    <a href="/impacts" class="base_button">Go back</a>
+    <!-- Footer -->
+    <footer class="site_footer">
+        <div class="footer_content">
+            <p>&copy; Frank & Matthew | <a href="/sources">Sources</a></p>
+        </div>
+    </footer>
+    <!-- Footer -->
+</body>
+</html>
