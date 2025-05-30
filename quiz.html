@@ -5,74 +5,325 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Climate Change Quiz</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Nunito', sans-serif;
-      background-color: #f9f6f1;
-      color: #333;
-      padding: 2rem;
-    }
-    h1 {
-      color: #5f402c;
-    }
-    section {
-      background: #fff;
-      border-radius: 10px;
-      padding: 1rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    label, p {
-      font-size: 1rem;
-      margin-top: 1rem;
-      display: block;
-    }
-    input[type="text"], input[type="number"] {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-  </style>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Nunito', sans-serif;
+            background-color: #f9f6f1;
+            color: #333333;
+        }
+        body {
+            flex-direction: column;
+            padding-top: 2rem;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
+        .top_bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3.5rem;
+            background-color: #5f402c;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .project_title_button {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        .project_title_button:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 6px;
+        }
+
+        .top_right_container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .top_right_container a {
+            color: white;
+            text-decoration: none;
+        }
+        .top_right_container a:hover {
+            color: #ffdd99;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: fit-content;
+        }
+        .dropdown_button {
+            background-color: #5f402c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin: 0 2rem;
+        }
+        .dropdown_content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f0ece6;
+            min-width: 160px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            z-index: 1001;
+        }
+        .dropdown_content a {
+            color: #333;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown_content a:hover {
+            background-color: #ddd3c1;
+            border-radius: 5px;
+        }
+        .dropdown:hover .dropdown_content {
+            display: block;
+        }
+        .dropdown:hover .dropdown_button {
+            background-color: #cc5500;
+        }
+
+        .image_container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .left_to_right_img {
+            max-height: 600px;
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        .image_overlay_text {
+            position: absolute;
+            top: 50%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: left;
+            width: 100%;
+            padding: 1rem;
+        }
+        .image_overlay_text h1 {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            margin: 0;
+        }
+        .image_overlay_text p {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            margin: 0.5rem 0 0 0;
+        }
+
+        .bar_with_text {
+            width: 100%;
+            background-color: #2e5339;
+            color: white;
+            padding: 0.5rem 1rem;
+            text-align: center;
+        }
+        .bar_with_text h1 {
+            font-size: clamp(1rem, 4vw, 2rem);
+            margin: 0;
+        }
+
+        .sections_container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            padding: 0 1rem;
+            justify-items: center;
+            flex: 1;
+        }
+
+        .base_section {
+            max-width: 800px;
+            min-width: 300px;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .base_section p {
+            font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+            margin-bottom: auto;
+        }
+        .base_section h1 {
+            color: #c18f00;
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            text-align: center;
+        }
+        .base_section img {
+            background-image: inherit;
+        }
+
+        .base_button {
+            display: block;
+            background-color: #5f402c;
+            color: white;
+            padding: 0.5rem 1rem;
+            margin: 2rem auto;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            text-align: center;
+            width: fit-content;
+        }
+        .base_button:hover {
+            background-color: #cc5500;
+        }
+
+        .site_footer {
+            background-color: #e2dacc;
+            color: 333333;
+            text-align: center;
+            padding: 0.3rem;
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+        .site_footer .footer_content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 5rem;
+            }
+            .top_bar {
+                flex-direction: column;
+                align-items: flex-start;
+                height: auto;
+                padding: 0.5rem 1rem;
+            }
+            .top_right_container {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .top_right_container a,
+            .dropdown_button {
+                width: fit-content;
+                padding: 0.5rem 1rem;
+                text-align: left;
+            }
+            .dropdown_content {
+                position: static;
+                box-shadow: none;
+                background-color: #e6e2db;
+                border-radius: 5px;
+                width: 100%;
+            }
+            .dropdown_content a {
+                padding: 0.5rem 1rem;
+            }
+            .dropdown {
+                width: 100%;
+            }
+            .project_title_button {
+                padding: 0.5rem 0;
+            }
+            .hide_on_mobile {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation bar -->
+    <div class="top_bar">
+        <a href="index.html" class="project_title_button">Climate Change & B.C. First Nations</a>
+        <div class="top_right_container">
+            <a href="quiz.html" class="hide_on_mobile">Quiz & Email</a>
+            <a href="sources.html" class="hide_on_mobile">Sources</a>
+            <div class="dropdown">
+                <button class="dropdown_button">Menu ▾</button>
+                <div class="dropdown_content">
+                    <a href="overview.html">Overview</a>
+                    <a href="impacts.html">Impacts</a>
+                    <a href="sources.html">Sources</a>
+                    <a href="quiz.html">Quiz & Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation bar -->
   <h1>Climate Change Quiz</h1>
 
-  <section>
-    <h2>Fill in the Blank</h2>
-    <label>1. Climate changes occur when <input type="text" /></label>
-    <label>2. This raises global <input type="text" /> to unnatural numbers.</label>
-    <label>3. The threat of climate change requires <input type="text" />, as its long-term effects can be <input type="text" /> or last for hundreds of years.</label>
-    <label>4. Higher global temperatures mean <input type="text" /> begin to melt, releasing tons of extra <input type="text" /> into the ocean. This will cause the <input type="text" /> levels to rise and permanently flood some countries.</label>
-    <label>5. …as regions could begin to <input type="text" /> due to rain cycles being disrupted.</label>
+  <section class="base_section">
+    <h1>Climate Change Quiz</h1>
+  
+    <section>
+      <h2>Fill in the Blank</h2>
+      <p>1. Climate changes occur when __________ are released in mass amounts.</p>
+      <p>2. This raises global ____________ to unnatural numbers.</p>
+      <p>3. The threat of climate change requires _______________, as its long-term effects can be ___________ or last for hundreds of years.</p>
+      <p>4. Higher global temperatures mean ___________ begin to melt, releasing tons of extra _________ into the ocean. This will cause the __________ levels to rise and permanently flood some countries.</p>
+      <p>5. ……as regions could begin to __________ due to rain cycles being disrupted.</p>
+    </section>
+  
+    <section>
+      <h2>True or False</h2>
+      <p>6. Indigenous communities are already experiencing the effects of climate change. T/F</p>
+      <p>7. The rise of global temperatures have led to worsening wildfire seasons. T/F</p>
+      <p>8. Floods have become even less common than usual due to the rise in temperatures. T/F</p>
+      <p>9. There have been reports of a declining moose population in certain areas along with berries. T/F</p>
+      <p>10. Alberta is the highest affected province in Canada caused by wildfires. T/F</p>
+      <p>17. Salmon is predicted to fall 100% in Indigenous People’s fisheries. T/F</p>
+    </section>
+  
+    <section>
+      <h2>Multi-Word Answers</h2>
+      <p>11. How many hectares of land and forests were burnt by the wildfires in British Columbia during the 2023 wildfire season?</p>
+      <p>12. How many people had to evacuate due to the hundreds of homes damaged/destroyed?</p>
+      <p>13. What are Indigenous communities losing caused by the wildfires?</p>
+      <p>14. In November 2021 a flood occurred, what did it cause?</p>
+      <p>15. What happened to the First Nations in the Okanagan after Nicola River overflowed?</p>
+    </section>
+  
+    <section>
+      <h2>Short Responses</h2>
+      <p>16. Extreme weather isn’t just contained to storms, it also includes __________, like the one recorded in 2021.</p>
+      <p>18. What animals are moving as the forage declines?</p>
+      <p>19. Many __________ lie close to rivers or coasts which exposes them to the risks that climate change is bringing.</p>
+      <p>20. What types of communities are caused by the catastrophic fires that destroy whole villages? (Ex: mountain communities)</p>
+    </section>
   </section>
-
-  <section>
-    <h2>True or False</h2>
-    <label>6. Indigenous communities are already experiencing the effects of climate change. <input type="text" placeholder="T/F" /></label>
-    <label>7. The rise of global temperatures have led to worsening wildfire seasons. <input type="text" placeholder="T/F" /></label>
-    <label>8. Floods have become even less common than usual due to the rise in temperatures. <input type="text" placeholder="T/F" /></label>
-    <label>9. There have been reports of a declining moose population in certain areas along with berries. <input type="text" placeholder="T/F" /></label>
-    <label>10. Alberta is the highest affected province in Canada caused by wildfires. <input type="text" placeholder="T/F" /></label>
-  </section>
-
-  <section>
-    <h2>Multi Word Answers</h2>
-    <label>11. How many hectares of land and forests were burnt by the wildfires in British Columbia during the 2023 wildfire season? <input type="text" /></label>
-    <label>12. How many people had to evacuate due to the hundreds of homes damaged/destroyed? <input type="text" /></label>
-    <label>13. What are Indigenous communities losing caused by the wildfires? <input type="text" /></label>
-    <label>14. In November 2021 a flood occurred, what did it cause? <input type="text" /></label>
-    <label>15. What happened to the First Nations in the Okanagan after Nicola River overflowed? <input type="text" /></label>
-  </section>
-
-  <section>
-    <h2>Small Responses</h2>
-    <label>16. Extreme weather isn’t just contained to storms, it also includes <input type="text" />, like the one recorded in 2021.</label>
-    <label>17. Salmon is predicted to fall 100% in Indigenous People’s fisheries. <input type="text" placeholder="T/F" /></label>
-    <label>18. What animals are moving as the forage declines? <input type="text" /></label>
-    <label>19. Many <input type="text" /> lie close to rivers or coasts which exposes them to the risks that climate change is bringing.</label>
-    <label>20. What types of communities are caused by the catastrophic fires that destroy whole villages? (Ex. mountain communities) <input type="text" /></label>
-  </section>
+  <a href="overview.html" class="base_button">Go back</a>
+  <!-- Footer -->
+  <footer class="site_footer">
+      <div class="footer_content">
+          <p>&copy; Frank & Matthew | <a href="sources.html">Sources</a></p>
+      </div>
+  </footer>
+  <!-- Footer -->
 </body>
 </html>
